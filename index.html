@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Stetic</title>
+
+    <style>
+        /* ====== COLORES Y DISEÑO ====== */
+        :root {
+            /* Paleta inspirada en el logo: blanco, verde lima y negro elegante */
+            --fondo: #f7faf5;
+            --panel: #ffffff;
+            --tarjeta: #ffffff;
+            --color: #40750e;
+            --color-oscuro: #335b12;
+            --texto: #20251f;
+            --texto-secundario: #5d6659;
+            --borde: #e1ead9;
+            --verde-suave: #edf6e5;
+            --csp: #1d3d00;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--fondo);
+            color: var(--texto);
+        }
+
+        /* ====== ENCABEZADO ====== */
+        header {
+            background: var(--panel);
+            color: var(--texto);
+            padding: 22px;
+            text-align: center;
+            border-bottom: 3px solid var(--color);
+            box-shadow: 0 3px 14px rgba(36, 58, 24, 0.06);
+        }
+
+        .encabezado-logo {
+            width: 75px;
+            height: 75px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            color: var(--texto-secundario);
+            margin-bottom: 0;
+        }
+
+        /* ====== PESTAÑAS DE NAVEGACIÓN ====== */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: #ffffff;
+            color: var(--color-oscuro);
+            border: 1px solid var(--borde);
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(36, 58, 24, 0.04);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        nav button:hover,
+        nav button.activo {
+            background: var(--csp);
+            border-color: var(--color);
+            color: #ffffff;
+        }
+
+        /* ====== CONTENIDO PRINCIPAL ====== */
+        main {
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto 40px;
+        }
+
+        .ventana {
+            display: none;
+            background: var(--panel);
+            color: var(--texto);
+            border: 1px solid var(--borde);
+            border-radius: 16px;
+            padding: 28px;
+            min-height: 300px;
+            box-shadow: 0 8px 24px rgba(36, 58, 24, 0.06);
+            animation: aparecer 0.25s ease;
+        }
+
+        .ventana.activa {
+            display: block;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ====== TÍTULOS Y TEXTOS ====== */
+        .ventana h2 {
+            text-align: center;
+            color: var(--color-oscuro);
+        }
+
+        .descripcion {
+            color: var(--texto-secundario);
+            font-size: 17px;
+            line-height: 1.8;
+            text-align: center;
+            white-space: pre-line;
+        }
+
+        .bloque-info {
+            background: #f8fbf5;
+            padding: 18px;
+            margin-top: 20px;
+            border: 1px solid var(--borde);
+            border-left: 4px solid var(--color);
+            border-radius: 10px;
+        }
+
+        .bloque-info h3 {
+            margin-top: 0;
+            color: var(--color-oscuro);
+        }
+
+        .bloque-info p {
+            color: var(--texto-secundario);
+            line-height: 1.7;
+        }
+
+        /* ====== CUADRÍCULA DE TARJETAS ====== */
+        .cuadricula {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .persona {
+            background: var(--tarjeta);
+            color: var(--texto);
+            border-radius: 12px;
+            padding: 20px 10px;
+            text-align: center;
+            border: 1px solid var(--borde);
+            box-shadow: 0 4px 12px rgba(36, 58, 24, 0.05);
+            transition: 0.2s;
+            min-width: 0;
+        }
+
+        .persona:hover {
+            border-color: var(--color);
+            transform: translateY(-4px);
+        }
+
+        .persona .icono {
+            margin-bottom: 10px;
+        }
+
+        .persona .icono img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        .persona h3 {
+            font-size: 16px;
+            margin: 5px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .persona p {
+            color: var(--texto-secundario);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* ====== TARJETAS GRANDES CON IMÁGENES CIRCULARES ====== */
+        .tarjetas-imagenes {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 28px;
+        }
+
+        .tarjeta-imagen {
+            background: var(--tarjeta);
+            color: var(--texto);
+            border-radius: 14px;
+            padding: 24px 16px;
+            text-align: center;
+            border: 1px solid var(--borde);
+            box-shadow: 0 4px 14px rgba(36, 58, 24, 0.06);
+            transition: 0.2s;
+        }
+
+        .tarjeta-imagen:hover {
+            border-color: var(--color);
+            transform: translateY(-4px);
+        }
+
+        .tarjeta-imagen img {
+            width: 150px;
+            height: 150px;
+            max-width: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 16px;
+        }
+
+        .tarjeta-imagen h3 {
+            color: var(--color-oscuro);
+            font-size: 18px;
+            margin: 8px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .tarjeta-imagen p {
+            color: var(--texto-secundario);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* ====== IMAGEN DE MÉTODOS DE PAGO ====== */
+        .imagen-pagos {
+            display: block;
+            width: 100%;
+            max-width: 520px;
+            max-height: 350px;
+            object-fit: contain;
+            margin: 25px auto;
+            border-radius: 12px;
+        }
+
+        /* ====== PIE DE PÁGINA ====== */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--texto-secundario);
+            font-size: 13px;
+        }
+
+        /* ====== DISEÑO PARA CELULARES ====== */
+        @media (max-width: 750px) {
+            .cuadricula {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .tarjetas-imagenes {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .ventana {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tarjetas-imagenes {
+                grid-template-columns: 1fr;
+            }
+
+            .tarjeta-imagen img {
+                width: 170px;
+                height: 170px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .cuadricula {
+                grid-template-columns: 1fr;
+            }
+
+            nav button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ====== ENCABEZADO DE LA PÁGINA ====== -->
+    <header>
+    <div class="persona">
+    <div class="icono">
+        <img src="imagenes/logo2.png" alt="Foto logo dental stetic">
+    </div>
+    <h3>Dental Stetic</h3>
+    <p>Tu sonrisa es nuestra prioridad</p>
+</div>
+</header>
+
+
+    <!-- ====== BOTONES PARA CAMBIAR DE PESTAÑA ====== -->
+    <nav>
+        <button class="activo" onclick="mostrarVentana('informacion', this)">
+            Información
+        </button>
+
+        <button onclick="mostrarVentana('personal', this)">
+            Personal
+        </button>
+
+        <button onclick="mostrarVentana('pagos', this)">
+            Métodos de pago
+        </button>
+
+        <!-- PESTAÑA ADICIONAL CON TARJETAS DE IMÁGENES -->
+        <button onclick="mostrarVentana('adicional', this)">
+            Servicios
+        </button>
+    </nav>
+
+    <main>
+
+        <!-- =====================================
+             VENTANA 1: INFORMACIÓN
+        ====================================== -->
+        <section id="informacion" class="ventana activa">
+
+            <h2>Información principal</h2>
+
+            <p class="descripcion">Centro Dental Stetic
+Centro Odontológico
+Juan López / Moca
+809-578-4248
+San Víctor / Moca
+809-823-0949
+Horario:
+De lunes a viernes
+8:00 a. m. a 12:00 p. m.
+2:00 p. m. a 6:00 p. m.</p>
+
+            <div class="bloque-info">
+                <h3>¡Contáctanos!</h3>
+                <p>
+                    Gmail: dentalstetic365@gmail.com <br> Tel/fijo: 809-578-4248 <br> whatsApp: 849-214-1147 <br> Instagram: Centro Dental Stetic
+                </p>
+            </div>
+
+            <div class="bloque-info">
+                <h3>MISIÓN</h3>
+                <p>
+                   Ofrecer Servicios Odontologicos Integrales Con Personal Capacitado Apegados A Los Altos Estandares De Calidad, Respaldo Con Tecnologia Avanzada, Para Asi Realizar Servicios De Manera Eficiente.
+
+                </p>
+            </div>
+
+                        <div class="bloque-info">
+                <h3>VISION</h3>
+                <p>
+                    Ser Lider En El Mercado De La Salud Buco-Dental Para Brindar La Mejor Alternativa Con Calidad Y Credibilidad.
+                </p>
+            </div>
+
+                        <div class="bloque-info">
+                <h3>VALORES</h3>
+                <p>
+                   Responsavilidad <br> Dedicacion <br> Confiabilidad <br> Honestidad <br> Respeto <br> Trabajo En Equipo
+                </p>
+            </div>
+<div class="servicios-contenedor">
+    <h2>SERVICIOS OFRECIDOS:</h2>
+    <ul class="lista-servicios">
+        <li>Implante Dental</li>
+        <li>Ortodoncia</li>
+        <li>Prótesis Fija Y Removible</li>
+        <li>Endodoncia</li>
+        <li>Rehabilitación Oral</li>
+        <li>Estética</li>
+    </ul>
+
+    
+</div>
+            
+
+        </section>
+
+        <!-- =====================================
+             VENTANA 2: PERSONAL
+        ====================================== -->
+        <section id="personal" class="ventana">
+
+            <h2>Lista de personal</h2>
+
+            <p class="descripcion">
+                Nuestro personal especializado.
+            </p>
+
+            <div class="cuadricula">
+
+                <!-- PERSONA 1 -->
+                <div class="persona">
+                    <div class="icono">
+                        <img src="imagenes/mahogany.jpeg" alt="Foto de Juan Pérez">
+                    </div>
+                    <h3>Dr. Mahogany García</h3>
+                    <p>Esp: Implantes
+                    </p>
+                </div>
+
+                <!-- PERSONA 2 -->
+                <div class="persona">
+                    <div class="icono">
+                        <img src="imagenes/xabriel.jfif" alt="Foto del segundo integrante del personal">
+                    </div>
+                    <h3>Dr. Xabriel Bencosme</h3>
+                    <p>Esp: Endodencia/Tratamiento de canal</p>
+                </div>
+
+                <!-- PERSONA 3 -->
+                <div class="persona">
+                    <div class="icono">
+                        <img src="imagenes/elisseth.jfif" alt="Foto del tercer integrante del personal">
+                    </div>
+                    <h3>Dr. Elisseth Pichardo</h3>
+                    <p>Esp: Cirugía</p>
+                </div>
+
+                <!-- PERSONA 4 -->
+                <div class="persona">
+                    <div class="icono">
+                        <img src="imagenes/fanny.jfif" alt="Foto del cuarto integrante del personal">
+                    </div>
+                    <h3>Dr. Fanny Grullon</h3>
+                    <p>Odontología General</p>
+                </div>
+
+                <!-- PERSONA 5 -->
+                <div class="persona">
+                    <div class="icono">
+                        <img src="imagenes/sinfoto.webp" alt="Sin foto de perfil">
+                    </div>
+                    <h3>Dr. Emely Solorin</h3>
+                    <p>Odontología General</p>
+                </div>
+
+                <!-- PERSONA 6 -->
+                <div class="persona">
+                    <div class="icono">
+                        <img src="imagenes/dailanny.png" alt="Foto del sexto integrante del personal">
+                    </div>
+                    <h3>Dr. Dailanny nuñez</h3>
+                    <p>Esp: Endodencia (De licencia) </p>
+                </div>
+
+                <!-- PERSONA 7 -->
+                <div class="persona">
+                    <div class="icono">
+                        <img src="imagenes/sinfoto.webp" alt="Foto del séptimo integrante del personal">
+                    </div>
+                    <h3>Dr. Jean Martinez</h3>
+                    <p>Odontólogo</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =====================================
+             VENTANA 3: MÉTODOS DE PAGO
+             EDITA EL TEXTO EN EL PÁRRAFO
+             Y CAMBIA LA IMAGEN EN src
+        ====================================== -->
+        <section id="pagos" class="ventana">
+
+            <h2>Métodos de pago</h2>
+
+            <!-- La imagen debe estar en la carpeta imagenes -->
+            <img
+                class="imagen-pagos"
+                src="imagenes/pagos.jfif"
+                alt="Métodos de pago aceptados por Dental Stetic"
+            >
+
+            <!-- EDITA ESTE TEXTO CON TU INFORMACIÓN -->
+            <div class="bloque-info">
+                <h3>Información sobre los métodos de pago</h3>
+
+                <p>
+                    Escribe aquí la información sobre los métodos de pago
+                    disponibles en la clínica. Puedes indicar si aceptan
+                    efectivo, transferencias bancarias, tarjetas u otras
+                    formas de pago.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- =====================================
+             VENTANA 4: NUEVA PESTAÑA CON TARJETAS
+             CAMBIA EL NOMBRE, LAS IMÁGENES Y LOS TÍTULOS
+        ====================================== -->
+        <section id="adicional" class="ventana">
+
+            
+
+          
+            <div class="tarjetas-imagenes">
+
+                <!-- TARJETA 1: CAMBIA imagen1.jpg, EL TÍTULO Y EL TEXTO -->
+                <div class="tarjeta-imagen">
+                    <img src="imagenes/imagen1.jpg" alt="Descripción de la primera imagen">
+                    <h3>Ortodoncia</h3>
+                    <p>Escribe aquí una descripción opcional.</p>
+                </div>
+
+                <!-- TARJETA 2 -->
+                <div class="tarjeta-imagen">
+                    <img src="imagenes/imagen2.jpg" alt="Descripción de la segunda imagen">
+                    <h3>Implante Dental</h3>
+                    <p>Escribe aquí una descripción opcional.</p>
+                </div>
+
+                <!-- TARJETA 3 -->
+                <div class="tarjeta-imagen">
+                    <img src="imagenes/imagen3.jpg" alt="Descripción de la tercera imagen">
+                    <h3>Endodoncia</h3>
+                    <p>Escribe aquí una descripción opcional.</p>
+                </div>
+
+                 <div class="tarjeta-imagen">
+                    <img src="imagenes/imagen4.jpg" alt="Descripción de la tercera imagen">
+                    <h3>Prótesis</h3>
+                    <p>Escribe aquí una descripción opcional.</p>
+                </div>
+
+                 <div class="tarjeta-imagen">
+                    <img src="imagenes/imagen5.jpg" alt="Descripción de la tercera imagen">
+                    <h3>Estética</h3>
+                    <p>Escribe aquí una descripción opcional.</p>
+                </div>
+
+                 <div class="tarjeta-imagen">
+                    <img src="imagenes/imagen6.jpg" alt="Descripción de la tercera imagen">
+                    <h3>Rehabilitación</h3>
+                    <p>Escribe aquí una descripción opcional.</p>
+                </div>
+
+            </div>
+
+            
+        </section>
+        <ul><a href="https://www.instagram.com/centrodental_stetic/" target="_blank">Síguenos en Instagram</a>
+</div></ul>
+
+    </main>
+
+    <footer>
+        © 2026 Dental Stetic Odontología | Odontología avanzada
+    </footer>
+
+    <!-- ====== FUNCIONAMIENTO DE LAS PESTAÑAS ====== -->
+    <script>
+        function mostrarVentana(id, boton) {
+
+            // Ocultar todas las ventanas
+            document.querySelectorAll('.ventana')
+                .forEach(function(ventana) {
+                    ventana.classList.remove('activa');
+                });
+
+            // Quitar el estado activo de todos los botones
+            document.querySelectorAll('nav button')
+                .forEach(function(b) {
+                    b.classList.remove('activo');
+                });
+
+            // Mostrar la ventana elegida
+            document.getElementById(id)
+                .classList.add('activa');
+
+            // Resaltar el botón seleccionado
+            boton.classList.add('activo');
+        }
+    </script>
+
+</body>
+</html>
